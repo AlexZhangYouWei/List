@@ -99,25 +99,27 @@ body{
 
 /* Confirm check button (edit mode) */
 .confirm-btn,.cancel-edit-btn{
-  height:42px;min-width:46px;
+  height:38px;min-width:44px;
   border:none;
-  border-radius:8px;
+  border-radius:999px;
   font-family:'Noto Serif TC',serif;
-  font-size:16px;font-weight:700;
+  font-size:15px;font-weight:700;
   cursor:pointer;display:flex;align-items:center;justify-content:center;
   transition:all .15s;
   -webkit-tap-highlight-color:transparent;
   white-space:nowrap;
 }
 .confirm-btn{
-  width:42px;background:var(--green);
-  color:#fff;font-size:20px;
+  width:46px;background:var(--green);
+  color:#fff;font-size:20px;line-height:1;
+  box-shadow:0 2px 8px rgba(78,108,40,.18);
 }
 .confirm-btn:hover{background:var(--green-h);}
 .cancel-edit-btn{
-  padding:0 12px;
-  border:1.5px solid var(--border-lt);
-  background:#fff;color:var(--text2);
+  min-width:76px;
+  padding:0 16px;
+  border:1.5px solid rgba(204,160,128,.42);
+  background:rgba(255,255,255,.68);color:var(--text2);
 }
 .cancel-edit-btn:hover{background:var(--cat-bg);border-color:var(--border);}
 .confirm-btn:active,.cancel-edit-btn:active{transform:scale(.92);}
@@ -196,7 +198,31 @@ body{
   min-height:50px;
 }
 .item-row:last-of-type{border-bottom:none;}
-.item-row.editing{align-items:flex-start;}
+.item-row.editing{
+  display:grid;
+  grid-template-columns:48px minmax(0,1fr);
+  grid-template-areas:
+    "check input"
+    ". actions";
+  align-items:start;
+  column-gap:10px;
+  row-gap:10px;
+  padding-top:10px;
+  padding-bottom:12px;
+}
+.item-row.editing .cb-wrap{grid-area:check;}
+.item-row.editing .item-input{
+  grid-area:input;
+  width:100%;
+  min-width:0;
+}
+.edit-actions{
+  grid-area:actions;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  justify-content:flex-start;
+}
 
 /* Checkbox touch target */
 .cb-wrap{
@@ -306,10 +332,13 @@ body{
   .hdr-title{font-size:1.82rem;}
   .bag-name{font-size:1.34rem;}
   .item-lbl,.item-input{font-size:18px;}
-  .item-row.editing{flex-wrap:wrap;}
-  .item-row.editing .item-input{flex-basis:calc(100% - 58px);}
-  .item-row.editing .confirm-btn{margin-left:58px;}
-  .item-row.editing .cancel-edit-btn{flex:1;}
+  .item-row.editing{
+    grid-template-columns:48px minmax(0,1fr);
+    column-gap:8px;
+  }
+  .confirm-btn,.cancel-edit-btn{height:38px;}
+  .confirm-btn{width:46px;min-width:46px;}
+  .cancel-edit-btn{min-width:78px;padding:0 18px;}
   .main{padding:14px 8px 64px;}
   .cat{margin:5px 9px;}
 }
@@ -528,18 +557,22 @@ function renderItem(bid,cid,item){
   <div class="cb-wrap" onclick="toggleCheck('${bid}','${cid}','${item.id}')">
     <div class="cb ${item.checked?'on':''}"><span class="cb-chk">✓</span></div>
   </div>
-  <input class="item-input" id="editinput_${item.id}" type="text" value="${esc(item.name)}"
+  <input class="item-input" id="editinput_${item.id}" type="text" inputmode="text"
+    autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false"
+    enterkeyhint="done" name="packing_item_${item.id}" value="${esc(item.name)}"
     onblur="onEditBlur('${bid}','${cid}','${item.id}')"
     onkeydown="onEditKey(event,'${bid}','${cid}','${item.id}')"
     placeholder="輸入項目名稱…">
-  <button class="confirm-btn" type="button"
-    onmousedown="holdEditOpen()"
-    ontouchstart="holdEditOpen()"
-    onclick="commitEditAndRender()">✓</button>
-  <button class="cancel-edit-btn" type="button"
-    onmousedown="holdEditOpen()"
-    ontouchstart="holdEditOpen()"
-    onclick="cancelEditAndRender()">取消</button>
+  <div class="edit-actions">
+    <button class="confirm-btn" type="button"
+      onmousedown="holdEditOpen()"
+      ontouchstart="holdEditOpen()"
+      onclick="commitEditAndRender()">✓</button>
+    <button class="cancel-edit-btn" type="button"
+      onmousedown="holdEditOpen()"
+      ontouchstart="holdEditOpen()"
+      onclick="cancelEditAndRender()">取消</button>
+  </div>
 </div>`;
   }
   return `
