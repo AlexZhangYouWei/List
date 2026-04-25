@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>奧捷夢幻13日 ✈️ 打包清單 v1.1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F7F1E8;
+  --card: #FEFAF4;
+  --cat-bg: #F3EDE2;
+  --border: #CCA080;
+  --border-lt: #E4D4C0;
+  --text: #2E1408;
+  --text2: #7A4430;
+  --text3: #B08868;
+  --green: #4E6C28;
+  --green-h: #3C5420;
+  --brown: #B5492B;
+  --brown-h: #8E3520;
+  --checked: #BBA898;
+  --danger: #C04840;
+  --danger-h: #9D3A30;
+  --shadow: 0 3px 18px rgba(80,28,8,.13);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Noto Serif TC','Georgia',serif;
+  background-color:var(--cream);
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 31px,rgba(175,138,82,.07) 31px,rgba(175,138,82,.07) 32px),
+    radial-gradient(ellipse at 15% 5%,rgba(200,165,110,.18) 0%,transparent 55%),
+    radial-gradient(ellipse at 88% 95%,rgba(82,108,42,.10) 0%,transparent 55%);
+  min-height:100vh;
+  color:var(--text);
+  font-size:16px;
+  line-height:1.6;
+}
+
+/* ── HEADER ── */
+.hdr{
+  position:sticky;top:0;z-index:50;
+  background:linear-gradient(140deg,#2A1008 0%,#8A3520 55%,#3A1005 100%);
+  padding:20px 20px 16px;
+  text-align:center;
+  box-shadow:0 5px 26px rgba(48,18,4,.48);
+}
+.hdr-title{
+  font-family:'Plus Jakarta Sans','Noto Sans TC',sans-serif;
+  font-size:1.6rem;font-weight:800;
+  color:#F0D898;letter-spacing:.04em;line-height:1.3;
+}
+.hdr-sub{font-size:.8rem;color:#C09050;letter-spacing:.14em;margin-top:3px;}
+
+/* ── PROGRESS ── */
+.prog-wrap{
+  background:var(--card);
+  border-bottom:2px solid var(--border-lt);
+  padding:14px 20px 16px;
+}
+.prog-label{
+  text-align:center;font-size:.95rem;
+  color:var(--text2);margin-bottom:8px;
+}
+.prog-label strong{color:var(--green);font-size:1.1rem;}
+.prog-track{
+  background:#E8DBC4;border-radius:99px;
+  height:11px;max-width:440px;margin:0 auto 13px;
+  overflow:hidden;
+}
+.prog-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--green),#7A9848);
+  border-radius:99px;
+  transition:width .45s ease;
+}
+.prog-actions{display:none;}
+.btn-reset{display:none;}
+
+/* Edit button */
+.edit-btn{
+  height:36px;min-width:44px;
+  padding:0 10px;
+  border:1.5px solid rgba(181,73,43,.28);
+  border-radius:8px;background:transparent;
+  color:var(--brown);font-size:13px;
+  font-family:'Noto Serif TC',serif;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .15s;
+  -webkit-tap-highlight-color:transparent;
+  white-space:nowrap;
+}
+.edit-btn:hover{background:rgba(181,73,43,.1);border-color:var(--brown);}
+.edit-btn:active{transform:scale(.92);}
+
+/* Confirm check button (edit mode) */
+.confirm-btn{
+  width:38px;height:38px;min-width:38px;
+  border:none;
+  border-radius:8px;background:var(--green);
+  color:#fff;font-size:18px;font-weight:700;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.confirm-btn:hover{background:var(--green-h);}
+.confirm-btn:active{transform:scale(.92);}
+
+/* Reset zone at bottom */
+.reset-area{
+  max-width:800px;margin:0 auto;
+  padding:4px 14px 32px;
+  text-align:center;
+}
+.btn-reset-foot{
+  font-family:inherit;font-size:.8rem;
+  border:1px solid var(--border-lt);border-radius:20px;
+  background:transparent;color:var(--text3);
+  padding:7px 20px;cursor:pointer;transition:all .15s;
+}
+.btn-reset-foot:hover{background:var(--cat-bg);color:var(--text2);}
+.btn-reset-foot:active{transform:scale(.96);}
+
+/* ── MAIN ── */
+.main{max-width:800px;margin:0 auto;padding:20px 14px 72px;}
+
+/* ── BAG CARD ── */
+.bag{
+  background:var(--card);
+  border:1.5px solid var(--border-lt);
+  border-radius:14px;
+  margin-bottom:22px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.bag-hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px 18px;
+  cursor:pointer;user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  background:linear-gradient(135deg,var(--brown) 0%,#D06040 100%);
+}
+.bag-hdr:active{opacity:.88;}
+.bag-hdr-l{display:flex;align-items:center;gap:10px;}
+.bag-icon{font-size:1.35rem;}
+.bag-name{font-family:'Plus Jakarta Sans','Noto Sans TC',sans-serif;font-size:1.1rem;font-weight:800;color:#F2D898;letter-spacing:.02em;line-height:1.3;}
+.bag-stat{font-size:.76rem;color:rgba(242,216,152,.72);margin-top:2px;}
+.bag-arrow{color:rgba(242,216,152,.75);font-size:1.15rem;transition:transform .25s;font-style:normal;flex-shrink:0;}
+.bag-arrow.cl{transform:rotate(-90deg);}
+
+.bag-body{padding:10px 0 6px;}
+.bag-body.hidden{display:none;}
+
+/* ── CATEGORY ── */
+.cat{
+  margin:6px 13px;
+  border:1px solid var(--border-lt);
+  border-radius:9px;overflow:hidden;
+}
+.cat-hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;
+  background:var(--cat-bg);
+  cursor:pointer;user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.cat-hdr:active{opacity:.8;}
+.cat-hdr-l{display:flex;align-items:center;gap:8px;}
+.cat-name{font-size:.9rem;font-weight:700;color:var(--brown);}
+.cat-stat{font-size:.76rem;color:var(--text3);}
+.cat-arrow{color:var(--text3);font-size:.9rem;transition:transform .2s;font-style:normal;}
+.cat-arrow.cl{transform:rotate(-90deg);}
+.cat-body.hidden{display:none;}
+
+/* ── ITEM ROW ── */
+.item-row{
+  display:flex;align-items:center;
+  padding:6px 14px;gap:10px;
+  border-bottom:1px solid rgba(196,160,110,.18);
+  min-height:50px;
+}
+.item-row:last-of-type{border-bottom:none;}
+
+/* Checkbox touch target */
+.cb-wrap{
+  width:48px;height:48px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  flex-shrink:0;
+}
+.cb{
+  width:26px;height:26px;
+  border:2.5px solid var(--border);
+  border-radius:6px;background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;pointer-events:none;
+}
+.cb.on{background:var(--green);border-color:var(--green);}
+.cb-chk{display:none;color:#fff;font-size:15px;font-weight:700;line-height:1;}
+.cb.on .cb-chk{display:block;}
+
+/* Label */
+.item-lbl{
+  flex:1;font-size:17px;color:var(--text);
+  cursor:pointer;padding:6px 0;line-height:1.5;
+  -webkit-tap-highlight-color:transparent;
+  word-break:break-all;
+}
+.item-lbl.done{color:var(--checked);text-decoration:line-through;text-decoration-color:var(--checked);}
+.item-lbl:hover{color:var(--brown);}
+.item-lbl-hint{font-size:.72rem;color:var(--text3);display:block;margin-top:1px;}
+
+/* Edit input */
+.item-input{
+  flex:1;
+  font-family:'Noto Serif TC',serif;
+  font-size:17px;
+  border:2px solid var(--green);border-radius:7px;
+  padding:6px 10px;background:#fff;color:var(--text);
+  outline:none;
+}
+
+/* Delete button – always visible */
+.del-btn{
+  width:38px;height:38px;min-width:38px;
+  border:1.5px solid rgba(192,72,64,.32);
+  border-radius:8px;background:transparent;
+  color:var(--danger);font-size:15px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.del-btn:hover{background:rgba(192,72,64,.1);border-color:var(--danger);}
+.del-btn:active{transform:scale(.92);}
+
+/* Add row */
+.add-row{padding:7px 14px 10px;}
+.add-btn{
+  display:flex;align-items:center;gap:8px;
+  width:100%;background:transparent;
+  border:1.5px dashed var(--border-lt);
+  border-radius:8px;padding:9px 14px;
+  color:var(--text3);
+  font-family:'Noto Serif TC',serif;font-size:14.5px;
+  cursor:pointer;transition:all .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.add-btn:hover{background:var(--cat-bg);color:var(--text2);border-color:var(--border);}
+.add-btn:active{transform:scale(.98);}
+
+/* ── MODAL ── */
+.modal-bg{
+  position:fixed;inset:0;
+  background:rgba(28,10,2,.68);
+  display:flex;align-items:center;justify-content:center;
+  z-index:999;padding:20px;
+}
+.modal-box{
+  background:var(--card);
+  border-radius:18px;padding:26px 22px 22px;
+  max-width:340px;width:100%;
+  box-shadow:0 14px 52px rgba(28,10,2,.48);
+}
+.modal-msg{font-size:1.05rem;color:var(--text);line-height:1.65;margin-bottom:22px;}
+.modal-btns{display:flex;gap:12px;}
+.modal-cancel,.modal-ok{
+  flex:1;padding:15px 10px;
+  border-radius:11px;
+  font-family:'Noto Serif TC',serif;font-size:1rem;
+  cursor:pointer;transition:all .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.modal-cancel{border:1.5px solid var(--border);background:#fff;color:var(--text2);}
+.modal-cancel:hover{background:var(--cat-bg);}
+.modal-cancel:active{transform:scale(.96);}
+.modal-ok{border:none;font-weight:700;}
+.modal-ok.danger{background:var(--danger);color:#fff;}
+.modal-ok.danger:hover{background:var(--danger-h);}
+.modal-ok.warn{background:var(--brown);color:#fff;}
+.modal-ok.warn:hover{background:var(--brown-h);}
+.modal-ok:active{transform:scale(.96);}
+
+/* ── FOOTER ── */
+.foot{text-align:center;padding:24px 20px;opacity:.42;font-size:.78rem;color:var(--text3);}
+
+/* ── RWD ── */
+@media(max-width:480px){
+  .hdr-title{font-size:1.75rem;}
+  .bag-name{font-size:1.3rem;}
+  .item-lbl,.item-input{font-size:16px;}
+  .main{padding:14px 8px 64px;}
+  .cat{margin:5px 9px;}
+}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-title">✈️ 奧捷夢幻13日</div>
+  <div class="hdr-sub">打包行李清單 · Packing Checklist</div>
+</div>
+
+<div class="prog-wrap">
+  <div class="prog-label" id="progLabel">計算中…</div>
+  <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  <div class="prog-actions">
+    <button class="btn-reset" onclick="askReset()">✕ 清除所有勾選</button>
+  </div>
+</div>
+
+<div class="main" id="main"></div>
+
+<div class="reset-area">
+  <button class="btn-reset-foot" onclick="askReset()">↺ 清除所有勾選</button>
+</div>
+
+<div class="foot">✈️ 旅途平安，玩得開心！祝爸媽有個美好的旅程 ☀️</div>
+
+<!-- Confirm modal -->
+<div class="modal-bg" id="modalBg" style="display:none">
+  <div class="modal-box">
+    <div class="modal-msg" id="modalMsg"></div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModal()">取消</button>
+      <button class="modal-ok" id="modalOk" onclick="runModal()"></button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════
+//  DEFAULT DATA (strings → converted to objects on first load)
+// ═══════════════════════════════════════
+const SCHEMA = [
+  { id:'b1', name:'隨身包（上飛機）', icon:'👜', cats:[
+    { id:'b1c1', name:'證件與通訊', items:[
+      '護照','機票','行程手冊','現金（台幣）','現金（歐元）','信用卡',
+      '手機 / SIM卡','充電線','行動電源','緊急聯絡資料卡'
+    ]},
+    { id:'b1c2', name:'健康與藥品', items:[
+      '日常用藥','常備藥品','老花眼鏡','假牙','酒精濕紙巾',
+      '口罩','護唇膏','眼罩','耳塞','痠痛膏'
+    ]},
+    { id:'b1c3', name:'舒適與娛樂', items:['耳機','筆','手機掛繩','鎖頭','髮圈'] }
+  ]},
+  { id:'b2', name:'手提行李袋（背包，飛機用）', icon:'🎒', cats:[
+    { id:'b2c1', name:'替換衣物',  items:['輕便外套','折疊購物袋','內褲'] },
+    { id:'b2c2', name:'盥洗用品',  items:['牙線','牙刷','小牙膏','假牙清潔錠','泡假牙杯子'] },
+    { id:'b2c3', name:'文件',      items:['護照影本備份','藥單或處方籤'] },
+    { id:'b2c4', name:'飲食',      items:['保溫瓶','小餅乾'] }
+  ]},
+  { id:'b3', name:'托運行李 I', icon:'🧳', cats:[
+    { id:'b3c1', name:'衣物類', items:[
+      '毛衣','發熱衣','長袖上衣數件','短袖上衣數件','長褲','保暖褲',
+      '褲子數件','睡衣','內衣','內褲','襪子 / 羊毛襪','羽絨外套','防風外套','遮陽帽'
+    ]},
+    { id:'b3c2', name:'盥洗用品', items:[
+      '指甲刀','梳子','鯊魚夾','毛巾','刮鬍刀','化妝水',
+      '臉部乳液','身體乳液','棉花棒','吹風機','漱口水','牙膏','牙刷','護唇膏'
+    ]},
+    { id:'b3c3', name:'裝備', items:[
+      '健走鞋','備用鞋子','背包 / 腰包','圍巾'
+    ]},
+    { id:'b3c4', name:'藥品類', items:[
+      '日常用藥備份','頭痛藥','腸胃藥','OK 繃','暈車藥',
+      '痠痛貼布','維他命/保健品','潤喉糖/喉片'
+    ]},
+    { id:'b3c5', name:'飲食',         items:['泡麵','燕麥餅乾','湯包'] },
+    { id:'b3c6', name:'盥洗用品（大瓶）', items:['洗髮乳','沐浴乳','洗面乳','卸妝乳'] }
+  ]},
+  { id:'b4', name:'托運行李 II', icon:'🧳', cats:[
+    { id:'b4c1', name:'衣物類', items:[
+      '毛衣','發熱衣','長袖上衣數件','短袖上衣數件','長褲','保暖褲',
+      '褲子數件','睡衣','內衣','內褲','襪子 / 羊毛襪','羽絨外套','防風外套','遮陽帽'
+    ]},
+    { id:'b4c2', name:'盥洗用品', items:[
+      '指甲刀','梳子','鯊魚夾','毛巾','刮鬍刀','化妝水',
+      '臉部乳液','身體乳液','棉花棒','吹風機','漱口水','牙膏','牙刷','護唇膏'
+    ]},
+    { id:'b4c3', name:'化妝品', items:['口紅','粉底液','眉筆'] },
+    { id:'b4c4', name:'日用品', items:[
+      '防曬乳','插座轉接頭','多插頭','髒衣袋','購物袋',
+      '環保筷','衛生紙','洗衣精','小衣架','雨傘/雨衣'
+    ]}
+  ]}
+];
+
+let _uid = 0;
+function uid(){ return 'i'+(Date.now())+'_'+(++_uid)+'_'+(Math.random().toString(36).slice(2,6)); }
+
+function buildDefault(){
+  return SCHEMA.map(b=>({
+    id:b.id, name:b.name, icon:b.icon, collapsed:false,
+    cats: b.cats.map(c=>({
+      id:c.id, name:c.name, collapsed:false,
+      items: c.items.map(n=>({ id:uid(), name:n, checked:false }))
+    }))
+  }));
+}
+
+// ═══════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════
+const SKEY = 'pk_eu_v5';
+let bags;
+let editInfo = null;   // { bid, cid, iid } or null
+let modalAction = null;
+
+function loadBags(){
+  try{
+    const s = localStorage.getItem(SKEY);
+    if(s){ bags = JSON.parse(s); return; }
+  }catch(e){}
+  bags = buildDefault();
+}
+function saveBags(){
+  try{ localStorage.setItem(SKEY, JSON.stringify(bags)); }catch(e){}
+}
+
+function findBag(bid){ return bags.find(b=>b.id===bid); }
+function findCat(bid,cid){ return findBag(bid)?.cats.find(c=>c.id===cid); }
+function findItem(bid,cid,iid){ return findCat(bid,cid)?.items.find(i=>i.id===iid); }
+
+// ── Stats ──
+function totalStats(){
+  let t=0,c=0;
+  bags.forEach(b=>b.cats.forEach(cc=>cc.items.forEach(i=>{t++;if(i.checked)c++;})));
+  return {t,c};
+}
+function bagStats(b){
+  let t=0,c=0;
+  b.cats.forEach(cc=>cc.items.forEach(i=>{t++;if(i.checked)c++;}));
+  return {t,c};
+}
+function catStats(cat){
+  return {t:cat.items.length, c:cat.items.filter(i=>i.checked).length};
+}
+
+// ═══════════════════════════════════════
+//  RENDER
+// ═══════════════════════════════════════
+function esc(s){
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
+
+function renderBag(bag){
+  const {t,c}=bagStats(bag);
+  const pct=t?Math.round(c/t*100):0;
+  const done=c===t&&t>0;
+  return `
+<div class="bag" id="bag_${bag.id}">
+  <div class="bag-hdr" onclick="toggleBag('${bag.id}')">
+    <div class="bag-hdr-l">
+      <span class="bag-icon">${done?'✅':bag.icon}</span>
+      <div>
+        <div class="bag-name">${esc(bag.name)}</div>
+        <div class="bag-stat">${c} / ${t} 項　${pct}%</div>
+      </div>
+    </div>
+    <i class="bag-arrow ${bag.collapsed?'cl':''}">▾</i>
+  </div>
+  <div class="bag-body ${bag.collapsed?'hidden':''}" id="bagbody_${bag.id}">
+    ${bag.cats.map(cat=>renderCat(bag.id,cat)).join('')}
+  </div>
+</div>`;
+}
+
+function renderCat(bid,cat){
+  const {t,c}=catStats(cat);
+  return `
+<div class="cat">
+  <div class="cat-hdr" onclick="toggleCat('${bid}','${cat.id}')">
+    <div class="cat-hdr-l">
+      <span class="cat-name">${esc(cat.name)}</span>
+      <span class="cat-stat">${c}/${t}</span>
+    </div>
+    <i class="cat-arrow ${cat.collapsed?'cl':''}">▾</i>
+  </div>
+  <div class="cat-body ${cat.collapsed?'hidden':''}">
+    ${cat.items.map(item=>renderItem(bid,cat.id,item)).join('')}
+    <div class="add-row">
+      <button class="add-btn" onclick="addItem('${bid}','${cat.id}')">＋ 新增項目</button>
+    </div>
+  </div>
+</div>`;
+}
+
+function renderItem(bid,cid,item){
+  const isEditing = editInfo && editInfo.iid===item.id;
+  if(isEditing){
+    return `
+<div class="item-row">
+  <div class="cb-wrap" onclick="toggleCheck('${bid}','${cid}','${item.id}')">
+    <div class="cb ${item.checked?'on':''}"><span class="cb-chk">✓</span></div>
+  </div>
+  <input class="item-input" id="editinput_${item.id}" type="text" value="${esc(item.name)}"
+    onblur="onEditBlur('${bid}','${cid}','${item.id}')"
+    onkeydown="onEditKey(event,'${bid}','${cid}','${item.id}')"
+    placeholder="輸入項目名稱…">
+  <button class="confirm-btn"
+    onmousedown="event.preventDefault()"
+    ontouchstart="event.preventDefault()"
+    onclick="commitEditAndRender()">✓</button>
+  <button class="del-btn"
+    onmousedown="onDelMouseDown('${bid}','${cid}','${item.id}','${esc(item.name)}')"
+    ontouchstart="onDelMouseDown('${bid}','${cid}','${item.id}','${esc(item.name)}')">✕</button>
+</div>`;
+  }
+  return `
+<div class="item-row">
+  <div class="cb-wrap" onclick="toggleCheck('${bid}','${cid}','${item.id}')">
+    <div class="cb ${item.checked?'on':''}"><span class="cb-chk">✓</span></div>
+  </div>
+  <div class="item-lbl ${item.checked?'done':''}" onclick="toggleCheck('${bid}','${cid}','${item.id}')">${esc(item.name)}</div>
+  <button class="edit-btn" onclick="startEdit('${bid}','${cid}','${item.id}')">編輯</button>
+  <button class="del-btn" onclick="askDelete('${bid}','${cid}','${item.id}','${esc(item.name)}')">✕</button>
+</div>`;
+}
+
+function render(){
+  document.getElementById('main').innerHTML = bags.map(b=>renderBag(b)).join('');
+  updateProgress();
+  // restore edit focus
+  if(editInfo){
+    const inp=document.getElementById('editinput_'+editInfo.iid);
+    if(inp){inp.focus();const len=inp.value.length;inp.setSelectionRange(len,len);}
+  }
+}
+
+function updateProgress(){
+  const {t,c}=totalStats();
+  document.getElementById('progLabel').innerHTML=`已完成 <strong>${c}</strong> / ${t} 項`;
+  document.getElementById('progFill').style.width=t?((c/t*100)+'%'):'0%';
+}
+
+// ═══════════════════════════════════════
+//  ACTIONS
+// ═══════════════════════════════════════
+function toggleBag(bid){
+  const bag=findBag(bid); if(!bag)return;
+  bag.collapsed=!bag.collapsed; saveBags();
+  const body=document.getElementById('bagbody_'+bid);
+  const arrow=document.querySelector('#bag_'+bid+' .bag-arrow');
+  if(bag.collapsed){body.classList.add('hidden');arrow.classList.add('cl');}
+  else{body.classList.remove('hidden');arrow.classList.remove('cl');}
+}
+
+function toggleCat(bid,cid){
+  const cat=findCat(bid,cid); if(!cat)return;
+  cat.collapsed=!cat.collapsed; saveBags();
+  render();
+}
+
+function toggleCheck(bid,cid,iid){
+  const item=findItem(bid,cid,iid); if(!item)return;
+  item.checked=!item.checked; saveBags();
+  render();
+}
+
+// ── EDIT ──
+function startEdit(bid,cid,iid){
+  if(editInfo){ editInfo=null; } // cancel any previous edit without saving
+  editInfo={bid,cid,iid};
+  render();
+}
+
+function commitEdit(){
+  if(!editInfo) return;
+  const {bid,cid,iid}=editInfo;
+  const inp=document.getElementById('editinput_'+iid);
+  const val=inp?inp.value.trim():'';
+  const item=findItem(bid,cid,iid);
+  if(item){
+    if(val){ item.name=val; }
+    else{
+      // empty → remove item
+      const cat=findCat(bid,cid);
+      if(cat) cat.items=cat.items.filter(i=>i.id!==iid);
+    }
+  }
+  editInfo=null;
+  saveBags();
+}
+
+function commitEditAndRender(){
+  commitEdit();
+  render();
+}
+
+let _skipBlur=false;
+function onDelMouseDown(bid,cid,iid,name){
+  _skipBlur=true;
+  editInfo=null;
+  saveBags();
+  setTimeout(()=>{
+    _skipBlur=false;
+    askDelete(bid,cid,iid,name);
+  },50);
+}
+
+function onEditBlur(bid,cid,iid){
+  // Blur = cancel edit without saving (user must click ✓ to confirm)
+  if(_skipBlur) return;
+  setTimeout(()=>{
+    if(editInfo && editInfo.iid===iid){
+      editInfo=null;
+      render();
+    }
+  },200);
+}
+
+function onEditKey(e,bid,cid,iid){
+  if(e.key==='Enter'){ e.preventDefault(); commitEditAndRender(); }
+  if(e.key==='Escape'){ editInfo=null; render(); }
+}
+
+// ── ADD ──
+function addItem(bid,cid){
+  editInfo=null; // cancel any open edit
+  const cat=findCat(bid,cid); if(!cat)return;
+  const iid=uid();
+  cat.items.push({id:iid,name:'',checked:false});
+  editInfo={bid,cid,iid};
+  saveBags();
+  render();
+}
+
+// ── DELETE ──
+function askDelete(bid,cid,iid,name){
+  showModal(
+    `確定要刪除「${name}」嗎？\n\n此動作無法復原。`,
+    '刪除', 'danger',
+    ()=>doDelete(bid,cid,iid)
+  );
+}
+
+function doDelete(bid,cid,iid){
+  const cat=findCat(bid,cid); if(!cat)return;
+  cat.items=cat.items.filter(i=>i.id!==iid);
+  if(editInfo && editInfo.iid===iid) editInfo=null;
+  saveBags(); render();
+}
+
+// ── RESET ──
+function askReset(){
+  showModal(
+    '確定要清除所有勾選嗎？\n\n項目不會被刪除，只會取消所有打勾。',
+    '清除勾選', 'warn',
+    doReset
+  );
+}
+function doReset(){
+  bags.forEach(b=>b.cats.forEach(c=>c.items.forEach(i=>i.checked=false)));
+  saveBags(); render();
+}
+
+// ═══════════════════════════════════════
+//  MODAL
+// ═══════════════════════════════════════
+function showModal(msg,confirmTxt,cls,action){
+  document.getElementById('modalMsg').textContent=msg;
+  const ok=document.getElementById('modalOk');
+  ok.textContent=confirmTxt;
+  ok.className='modal-ok '+cls;
+  modalAction=action;
+  document.getElementById('modalBg').style.display='flex';
+}
+function closeModal(){
+  document.getElementById('modalBg').style.display='none';
+  modalAction=null;
+}
+function runModal(){
+  if(modalAction) modalAction();
+  closeModal();
+}
+// close on backdrop click
+document.getElementById('modalBg').addEventListener('click',function(e){
+  if(e.target===this) closeModal();
+});
+
+// ═══════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════
+loadBags();
+render();
+</script>
+</body>
+</html>
