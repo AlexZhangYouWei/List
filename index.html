@@ -110,8 +110,8 @@ body{
   white-space:nowrap;
 }
 .confirm-btn{
-  width:46px;background:var(--green);
-  color:#fff;font-size:20px;line-height:1;
+  min-width:76px;padding:0 18px;background:var(--green);
+  color:#fff;font-size:15px;line-height:1;
   box-shadow:0 2px 8px rgba(78,108,40,.18);
 }
 .confirm-btn:hover{background:var(--green-h);}
@@ -337,7 +337,7 @@ body{
     column-gap:8px;
   }
   .confirm-btn,.cancel-edit-btn{height:38px;}
-  .confirm-btn{width:46px;min-width:46px;}
+  .confirm-btn{min-width:78px;padding:0 18px;}
   .cancel-edit-btn{min-width:78px;padding:0 18px;}
   .main{padding:14px 8px 64px;}
   .cat{margin:5px 9px;}
@@ -417,19 +417,9 @@ const SCHEMA = [
       '痠痛貼布','維他命/保健品','潤喉糖/喉片'
     ]},
     { id:'b3c5', name:'飲食',         items:['泡麵','燕麥餅乾','湯包'] },
-    { id:'b3c6', name:'盥洗用品（大瓶）', items:['洗髮乳','沐浴乳','洗面乳','卸妝乳'] }
-  ]},
-  { id:'b4', name:'托運行李 II', icon:'🧳', cats:[
-    { id:'b4c1', name:'衣物類', items:[
-      '毛衣','發熱衣','長袖上衣數件','短袖上衣數件','長褲','保暖褲',
-      '褲子數件','睡衣','內衣','內褲','襪子 / 羊毛襪','羽絨外套','防風外套','遮陽帽'
-    ]},
-    { id:'b4c2', name:'盥洗用品', items:[
-      '指甲刀','梳子','鯊魚夾','毛巾','刮鬍刀','化妝水',
-      '臉部乳液','身體乳液','棉花棒','吹風機','漱口水','牙膏','牙刷','護唇膏'
-    ]},
-    { id:'b4c3', name:'化妝品', items:['口紅','粉底液','眉筆'] },
-    { id:'b4c4', name:'日用品', items:[
+    { id:'b3c6', name:'盥洗用品（大瓶）', items:['洗髮乳','沐浴乳','洗面乳','卸妝乳'] },
+    { id:'b3c7', name:'化妝品', items:['口紅','粉底液','眉筆'] },
+    { id:'b3c8', name:'日用品', items:[
       '防曬乳','插座轉接頭','多插頭','髒衣袋','購物袋',
       '環保筷','衛生紙','洗衣精','小衣架','雨傘/雨衣'
     ]}
@@ -454,6 +444,7 @@ function buildDefault(){
 // ═══════════════════════════════════════
 const SKEY = 'pk_eu_v5';
 const OPEN_MIGRATION_KEY = 'pk_eu_v5_open_state_v1';
+const MERGE_BAG2_KEY = 'pk_eu_v5_merge_bag2_v1';
 let bags;
 let editInfo = null;   // { bid, cid, iid } or null
 let modalAction = null;
@@ -461,9 +452,10 @@ let modalAction = null;
 function loadBags(){
   try{
     const s = localStorage.getItem(SKEY);
-    if(s){ bags = JSON.parse(s); applyDefaultBagOpenState(); return; }
+    if(s){ bags = JSON.parse(s); mergeCheckedBagTwoIntoOne(); applyDefaultBagOpenState(); return; }
   }catch(e){}
   bags = buildDefault();
+  mergeCheckedBagTwoIntoOne();
   applyDefaultBagOpenState();
 }
 function saveBags(){
@@ -476,6 +468,51 @@ function applyDefaultBagOpenState(){
   bags.forEach((bag,idx)=>{ bag.collapsed = idx>=2; });
   saveBags();
   try{ localStorage.setItem(OPEN_MIGRATION_KEY,'done'); }catch(e){}
+}
+function defaultItemsForCat(catId){
+  const cat = SCHEMA.flatMap(b=>b.cats).find(c=>c.id===catId);
+  return cat ? cat.items.map(n=>({ id:uid(), name:n, checked:false })) : [];
+}
+function mergeCheckedBagTwoIntoOne(){
+  try{
+    if(localStorage.getItem(MERGE_BAG2_KEY)) return;
+  }catch(e){}
+
+  const bagOne = bags.find(b=>b.id==='b3');
+  const bagTwo = bags.find(b=>b.id==='b4');
+  if(!bagOne){
+    try{ localStorage.setItem(MERGE_BAG2_KEY,'done'); }catch(e){}
+    return;
+  }
+
+  const ensureCat = (id,name,items)=>{
+    let cat = bagOne.cats.find(c=>c.id===id || c.name===name);
+    if(!cat){
+      cat = { id, name, collapsed:false, items };
+      bagOne.cats.push(cat);
+    }else if(!cat.id){
+      cat.id = id;
+    }
+    return cat;
+  };
+
+  const addUniqueItems = (targetCat, sourceItems)=>{
+    const existing = new Set(targetCat.items.map(i=>i.name));
+    sourceItems.forEach(item=>{
+      if(existing.has(item.name)) return;
+      targetCat.items.push(item);
+      existing.add(item.name);
+    });
+  };
+
+  const makeupSource = bagTwo?.cats.find(c=>c.name==='化妝品')?.items || defaultItemsForCat('b3c7');
+  const dailySource = bagTwo?.cats.find(c=>c.name==='日用品')?.items || defaultItemsForCat('b3c8');
+  addUniqueItems(ensureCat('b3c7','化妝品',[]), makeupSource);
+  addUniqueItems(ensureCat('b3c8','日用品',[]), dailySource);
+
+  bags = bags.filter(b=>b.id!=='b4' && b.name!=='托運行李 II');
+  saveBags();
+  try{ localStorage.setItem(MERGE_BAG2_KEY,'done'); }catch(e){}
 }
 
 function findBag(bid){ return bags.find(b=>b.id===bid); }
@@ -557,9 +594,9 @@ function renderItem(bid,cid,item){
   <div class="cb-wrap" onclick="toggleCheck('${bid}','${cid}','${item.id}')">
     <div class="cb ${item.checked?'on':''}"><span class="cb-chk">✓</span></div>
   </div>
-  <input class="item-input" id="editinput_${item.id}" type="text" inputmode="text"
+  <input class="item-input" id="editinput_${item.id}" type="search" inputmode="search"
     autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false"
-    enterkeyhint="done" name="packing_item_${item.id}" value="${esc(item.name)}"
+    enterkeyhint="done" role="textbox" name="item_${item.id}" value="${esc(item.name)}"
     onblur="onEditBlur('${bid}','${cid}','${item.id}')"
     onkeydown="onEditKey(event,'${bid}','${cid}','${item.id}')"
     placeholder="輸入項目名稱…">
@@ -567,7 +604,7 @@ function renderItem(bid,cid,item){
     <button class="confirm-btn" type="button"
       onmousedown="holdEditOpen()"
       ontouchstart="holdEditOpen()"
-      onclick="commitEditAndRender()">✓</button>
+      onclick="commitEditAndRender()">確定</button>
     <button class="cancel-edit-btn" type="button"
       onmousedown="holdEditOpen()"
       ontouchstart="holdEditOpen()"
